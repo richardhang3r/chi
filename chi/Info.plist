@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.hang3r.chi.refresh</string>
+		<string>com.hang3r.chi.checkin</string>
+		<string>com.hang3r.chi.midnight</string>
+	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>NSCameraReactionEffectGesturesEnabledDefault</key>
+	<true/>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Notify when activity intervals are ending and prompt user to open app from shield extension</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
+</dict>
+</plist>

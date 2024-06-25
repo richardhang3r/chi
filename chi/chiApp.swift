@@ -10,23 +10,35 @@ import SwiftData
 
 @main
 struct chiApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    
+    let container = MainModelContainer().makeContainer()
+    @UIApplicationDelegateAdaptor var appDelegate: MyAppDelegate
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
+    init() {
+        // uniquely identify this user on this device
+        Config.setUniqueUserId()
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .modelContainer(container)
+                .background(Color.beige)
+                .edgesIgnoringSafeArea(.all)
+                .onAppear {
+                    // checkin at least twice a day
+                    //_ = scheduleAppCheckin()
+                    scheduleAppMidnight()
+                }
         }
-        .modelContainer(sharedModelContainer)
+        .backgroundTask(.appRefresh("com.hang3r.chi.refresh")) {
+            await Goal.backgroundUpdateData()
+        }
+        .backgroundTask(.appRefresh("com.hang3r.chi.checkin")) {
+            await Goal.backgroundUpdateData()
+        }
+        .backgroundTask(.appRefresh("com.hang3r.chi.midnight")) {
+            await Goal.midnightUpdate()
+            await Goal.backgroundUpdateData()
+        }
     }
 }
