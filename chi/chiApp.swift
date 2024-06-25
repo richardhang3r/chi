@@ -14,10 +14,6 @@ struct chiApp: App {
     let container = MainModelContainer().makeContainer()
     @UIApplicationDelegateAdaptor var appDelegate: MyAppDelegate
 
-    init() {
-        // uniquely identify this user on this device
-        Config.setUniqueUserId()
-    }
     var body: some Scene {
         WindowGroup {
             RootView()

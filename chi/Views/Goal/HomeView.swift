@@ -185,6 +185,7 @@ struct HomeViewRoot: View {
                     try await CloudManager.removeFromGoal(userId: globalUserId, recordId: record.recordID)
                 }
                 MyUserDefaults.clear_all_enforcement()
+                goal.teardown()
                 modelContext.delete(goal)
             } catch {
                 print("failed to leave goal \(goal)")

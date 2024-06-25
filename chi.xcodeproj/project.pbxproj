@@ -607,7 +607,6 @@
 			);
 			mainGroup = EBB4FAD62C0E56D70078DBB7;
 			packageReferences = (
-				EB575B292C0F9F210060BB53 /* XCRemoteSwiftPackageReference "quickpose-ios-sdk" */,
 			);
 			productRefGroup = EBB4FAE02C0E56D70078DBB7 /* Products */;
 			projectDirPath = "";
@@ -1301,17 +1300,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		EB575B292C0F9F210060BB53 /* XCRemoteSwiftPackageReference "quickpose-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/quickpose/quickpose-ios-sdk.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = EBB4FAD72C0E56D70078DBB7 /* Project object */;
 }

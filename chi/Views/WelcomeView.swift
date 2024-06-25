@@ -10,7 +10,7 @@ import CloudKit
 
 struct WelcomeView: View {
     @State var goal: Goal = Goal()
-    @State var id: CKRecord.ID? = nil
+    @State var id : String = MyUserDefaults.globalUserId
     @State var err: String? = nil
     @State var commited: Bool = currentUserName != nil
     @State private var username = currentUserName ?? ""
@@ -34,6 +34,9 @@ struct WelcomeView: View {
                 })
                 .textFieldStyle(.roundedBorder)
                 .padding()
+            } else if (id.isEmpty) {
+                Text("invalid icloud account")
+                    .foregroundStyle(.red)
             } else {
                 NavigationLink(value: 13) {
                     Text("join existing")
@@ -57,21 +60,31 @@ struct WelcomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity) // 1
         .background(Color.beige)
         .onAppear {
-            if MyUserDefaults.globalUserId.isEmpty {
-                goal.fetchUserRecordID {result in
+            print("welcome view on appear")
+            //force set user id for now
+            goal.fetchUserRecordID {result in
+                DispatchQueue.main.async {
                     switch(result) {
                     case .success(let recordid):
-                        id = recordid
+                        print("found user id!!")
                         Config.forceSetUniqueUserId(id: recordid.recordName)
+                        self.id = recordid.recordName
+                        // reset goal with new user id
+                        goal = Goal(userid: recordid.recordName)
                         break
                     case .failure(let error):
                         err = error.localizedDescription
                         break
                     }
-                    goal = Goal()
-                    self.id = id
                 }
             }
+            
+            if !MyUserDefaults.globalUserId.isEmpty {
+                print("shared user id: \(MyUserDefaults.globalUserId) local: \(globalUserId)")
+                self.id = MyUserDefaults.globalUserId
+            }
+            
+            print("user id: \(String(describing: goal.getLocalUser()?.userId))")
         }
         .navigationDestination(for: Int.self) { num in
             switch(num) {

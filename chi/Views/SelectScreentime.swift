@@ -190,7 +190,7 @@ struct ScreentimeAppView: View {
                     .padding()
             }
             .buttonStyle(.bordered)
-            //.disabled(somethingSelected == false)
+            .disabled(somethingSelected == false)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity) // 1

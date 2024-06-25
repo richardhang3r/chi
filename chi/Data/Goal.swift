@@ -193,10 +193,10 @@ final class Goal : Sendable {
         self.setLastKnownRecordIfNewer(record)
     }
     
-    init(id: String = UUID().uuidString, type: GoalType = GoalType.squat) {
+    init(id: String = UUID().uuidString, type: GoalType = GoalType.squat, userid: String = globalUserId) {
         self._type = type.rawValue
         self.ident = id
-        let me : Peer = Peer()
+        let me : Peer = Peer(userId: globalUserId)
         self.participants.append(me)
         self.lastKnownRecord = CKRecord(recordType: Goal.recordType, recordID: self.recordId)
     }

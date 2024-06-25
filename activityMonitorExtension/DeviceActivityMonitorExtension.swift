@@ -31,6 +31,7 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
             // for bypass we allow the user during the allotted time so clear restrictions
             let store = ManagedSettingsStore()
             store.clearAllSettings()
+            NotificationManager.notifyFromActivityMonitor(message: "five minutes begin now")
             //Task {
               //  await MainActor.run {
             Task {
@@ -43,7 +44,6 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
                         modelContext.insert(goal)
                         do {
                             try modelContext.save()
-                            NotificationManager.notifyFromActivityMonitor(message: "five minut3s begin now \(modelContext.hasChanges)")
                         } catch {
                             NotificationManager.notifyDeveloper(subtitle: "data error", message: error.localizedDescription.description)
                         }

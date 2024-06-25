@@ -40,7 +40,7 @@ enum Config {
     //static let modelContainer = try! ModelContainer(for: schema, configurations: [.init(isStoredInMemoryOnly: false,cloudKitDatabase: .none)])
     
     static func forceSetUniqueUserId(id: String) {
-        //UserDefaults.standard.setValue(id, forKey: "UserId")
+        UserDefaults.standard.setValue(id, forKey: "UserId")
         MyUserDefaults.globalUserId = id
     }
     
@@ -50,21 +50,21 @@ enum Config {
             print("UserId already set \(user_id)")
         } else {
             MyUserDefaults.globalUserId = UUID().uuidString
-            //UserDefaults.standard.setValue(UUID().uuidString, forKey: "UserId")
+            UserDefaults.standard.setValue(UUID().uuidString, forKey: "UserId")
         }
     }
 }
 
 var currentUserName: String? {
     get{
-        UserDefaults.standard.string(forKey: "UserName") ?? "anon"
+        UserDefaults.standard.string(forKey: "UserName") ?? nil
     }
 }
 
 var globalUserId: String  {
     get{
-        MyUserDefaults.globalUserId
-        //UserDefaults.standard.string(forKey: "UserId") ?? "balls"
+        //MyUserDefaults.globalUserId
+        UserDefaults.standard.string(forKey: "UserId") ?? ""
     }
 }
 
