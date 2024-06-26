@@ -66,7 +66,6 @@ struct GoalSummaryPage: View {
                                     try await CloudManager.saveToCloud(goal: goal)
                                     goal.setup()
                                     modelContext.insert(goal)
-                                    goal.manualUpdate()
                                 } catch (let error) {
                                     print("cm error \(error)")
                                     saveError = error.localizedDescription

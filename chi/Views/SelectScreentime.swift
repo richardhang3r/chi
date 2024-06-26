@@ -306,10 +306,10 @@ struct BlockedAppsView: View {
             }
             print("clicked! \(disabled)")
         } label: {
-            if (app_token_array.isEmpty) {
-                Text("configure blocked apps")
-            } else {
-                VStack {
+            VStack {
+                if (app_token_array.isEmpty) {
+                    Text("configure blocked apps")
+                } else {
                     HStack {
                         let tokens = load_app_tokens(selection: selection)
                         ForEach(tokens.categories) { category in
@@ -326,13 +326,13 @@ struct BlockedAppsView: View {
                         }
                     }
                     .shadow(radius: 10)
-                    if showLocked {
-                        Text("locked")
-                            .font(.caption2)
-                            .foregroundStyle(.red)
-                    }
                 }
-                .padding()
+            }
+            .padding()
+            if showLocked {
+                Text("locked")
+                    .font(.caption2)
+                    .foregroundStyle(.red)
             }
         }
         .padding()

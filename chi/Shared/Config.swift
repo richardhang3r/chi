@@ -11,6 +11,27 @@ import SwiftData
 import os.log
 
 
+
+extension Bundle {
+    var appVersion: String {
+        return infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+    }
+
+    var buildNumber: String {
+        return infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+    }
+    
+    var buildConfiguration: String {
+        #if DEBUG
+        return "debug"
+        #else
+        return "release"
+        #endif
+    }
+    
+}
+
+
 public class MainModelContainer {
     
     public let schema = SwiftData.Schema([

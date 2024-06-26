@@ -257,6 +257,7 @@ class HealthData {
             
             if error != nil {
                 // Handle the error here
+                NotificationManager.notifyDeveloper(subtitle: "obsrv hk err", message: error!.localizedDescription)
                 completionHandler()
                 return
             }
@@ -278,6 +279,20 @@ class HealthData {
                                             NotificationManager.notifyFromActivityMonitor(message: "complete! \(goal.type.title) \(Int(goal.getLocalUserValue()))/\(Int(goal.target))")
                                         }
                                     }
+                                    Task {
+                                        if let me = goal.getLocalUser() {
+                                            do {
+                                                let record = goal.lastKnownRecord!
+                                                print("got goal record obsrv \(record.debugDescription)")
+                                                try await CloudManager.updateUser(me: me, recordId: goal.lastKnownRecord!.recordID)
+                                                NotificationManager.notifyDeveloper(subtitle: "obsrv cloudkit success", message: "\(goal.type.title): \(Int(goal.getLocalUserValue()))")
+                                            } catch {
+                                                print("observ cloud \(error)")
+                                                NotificationManager.notifyDeveloper(subtitle: "obsrv cloudkit err", message: error.localizedDescription.description)
+                                            }
+                                        }
+                                    }
+                                    goal.updateCount += 1
                                 }
                             }
                             do {
@@ -288,25 +303,7 @@ class HealthData {
                         } else {
                             print("failed to fetch goals")
                         }
-                        
-                        if let goal = _goals?.first,
-                           let me = goal.getLocalUser() {
-                            Task {
-                                do {
-                                    let record = goal.lastKnownRecord!
-                                    print("got goal record obsrv \(record.debugDescription)")
-                                    try await CloudManager.updateUser(me: me, recordId: goal.lastKnownRecord!.recordID)
-                                    NotificationManager.notifyDeveloper(subtitle: "obsrv cloudkit success", message: "\(goal.type.title): \(Int(goal.getLocalUserValue()))")
-                                } catch {
-                                    print("observ cloud \(error)")
-                                    NotificationManager.notifyDeveloper(subtitle: "obsrv cloudkit err", message: error.localizedDescription.description)
-                                }
-                            }
-                        } else {
-                            print("failed to fetch goals and/or me")
-                        }
                     }
-                    
                 }
                 completionHandler()
             }
@@ -343,7 +340,6 @@ class HealthData {
             if let statsCollection = results {
                 var all_data: [HealthDateData] = []
                 let sources = statsCollection.sources()
-                print("health sources \(sources.debugDescription)")
                 statsCollection.enumerateStatistics(from: anchor_date, to: Date()) { (statistics, stop) in
                     let val : Double
                     if let quantity = getStatisticsQuantity(for: statistics, with: getStatisticsOptions(for: type_id)),

@@ -77,10 +77,19 @@ extension Goal {
         return image
     }
     
+    
+    func checkIn() {
+        if let localUser = self.participants.first(where: {$0.userId == globalUserId}) {
+            let formattedDate = getDateStringShort(date: Date.now)
+            let todayData = localUser.getTodaysData()
+            _ = self.updateData(val: todayData.value, date: Date.now)
+        }
+    }
+    
     func updateData(val: Double, date: Date) -> Bool {
         let justCompleted : Bool
         print("updating data \(val)")
-        if let me = self.participants.firstIndex(where: {$0.userId == globalUserId}) {
+        if let me = self.participants.firstIndex(where: {$0.userId == MyUserDefaults.globalUserId}) {
             self.record.userModificationDate = Date.now
             self.participants[me].lastUpdate = Date.now
             justCompleted = self.participants[me].setNewValue(val: val, date: date, target: self.target)
@@ -93,6 +102,7 @@ extension Goal {
     }
 
     func manualUpdate() {
+        print("\n\nMANUAL UPDATE\n\n")
         if self.type.supportHealthKit {
             HealthData.health_data_update(dataType: self.type.healthIdentifier.rawValue)
         }
@@ -151,7 +161,7 @@ extension Goal {
             store.shield.webDomains = selection.webDomainTokens
             print("restricting apps")
         }
-        //self.manualUpdate()
+        self.manualUpdate()
         ActivityMonitor.setDailyEvent(thresholdMinutes: 1000)
     }
     

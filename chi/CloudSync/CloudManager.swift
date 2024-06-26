@@ -88,9 +88,7 @@ class CloudManager {
     
     static func updateUser(me: Peer, recordId: CKRecord.ID) async throws {
         
-        
         print("updating user of server record with id \(recordId.debugDescription)")
-        
         let container = Config.cloudContainer
         // using public database only
         let database : CKDatabase = container.publicCloudDatabase

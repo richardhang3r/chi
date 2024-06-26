@@ -38,10 +38,7 @@ struct PendingGoal: View {
                                     goal.addUser(me)
                                     savingToCloud = true
                                     try await CloudManager.saveToCloud(goal: goal)
-                                    goal.setup()
-                                    goal.manualUpdate()
                                     modelContext.insert(goal)
-                                    Router.shared.popToRoot()
                                 } catch (let error) {
                                     print("cm error \(error)")
                                     saveError = error.localizedDescription

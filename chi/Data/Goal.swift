@@ -296,7 +296,7 @@ extension Goal {
     }
     func userBypassed() {
         for index in self.participants.indices {
-            if self.participants[index].userId == globalUserId {
+            if self.participants[index].userId == MyUserDefaults.globalUserId {
                 self.participants[index].appBypass()
             }
         }
@@ -317,7 +317,6 @@ extension Goal {
         }
         return val
     }
-    
     
     func updateSharedDefaults()
     {
@@ -390,63 +389,34 @@ extension Goal {
             } else {
                 Logger.dataModel.error("No enforcement type in goal record")
             }
-            
-            let test = try? record.decode(forKey: .peerlist) as [Peer]
-            if var participants = test {
-                for peerIndex in participants.indices {
-                    let peer = participants[peerIndex]
-                    let dr = peer.getTodaysData()
-                    let val = dr.value
-                    print("name:\(peer.name) val:\(val) vs local \(Int(self.getLocalUserValue())) update: \(peer.lastUpdate)")
-                    if peer.userId == globalUserId {
-                        // server me!
-                        if let localMe = self.participants.first(where: {$0.userId == globalUserId}) {
-                            if localMe.lastUpdate < peer.lastUpdate {
-                                // always trust local for now
-                                print("trusting local instance over server one")
-                            }
-                        }
-                    } else {
-                        if let localIndex = self.participants.firstIndex(where: {$0.userId == peer.userId}) {
-                            // update local instance with server
-                            self.participants[localIndex] = peer
-                            print("updating user \(peer.name)")
-                        } else {
-                            print("adding user \(peer.name)")
-                            self.participants.append(peer)
-                        }
-                    }
-                }
-                
-                /*
-                if let serverIndex = participants.firstIndex(where: {globalUserId == $0.userId}) {
-                    if let localMe = self.participants.first(where: {$0.userId == globalUserId}) {
-                        // overwrite server understanding with local
-                        if (participants[serverIndex].lastUpdate < localMe.lastUpdate) {
-                            participants[serverIndex] = localMe
-                        }
-                    } else {
-                        print("no local record of me participant list")
-                    }
-                    // update me
-                    self.participants = participants
-                } else {
-                    if let localMe = self.participants.first(where: {$0.userId == globalUserId}) {
-                        // remove server understanding
-                        print("no record of me in server. adding")
-                        participants.append(localMe)
-                    } else {
-                        print("no record of me in server or locally. not adding")
-                    }
-                    self.participants = participants
-                }
-                 */
-            } else {
-                Logger.dataModel.error("Failed to decode user list")
-            }
-
         } else {
             Logger.dataModel.info("Not overwriting data from older User record")
+        }
+        
+        let test = try? record.decode(forKey: .peerlist) as [Peer]
+        if let participants = test {
+            for peerIndex in participants.indices {
+                let peer = participants[peerIndex]
+                let dr = peer.getTodaysData()
+                let val = dr.value
+                print("name:\(peer.name) val:\(val) vs local \(Int(self.getLocalUserValue())) update: \(peer.lastUpdate)")
+                if let localIndex = self.participants.firstIndex(where: {$0.userId == peer.userId}) {
+                    if peer.userId == globalUserId {
+                        // this is me
+                        // always trust local for now
+                        print("trusting local instance over server one")
+                    } else {
+                        // update local instance with server
+                        print("updating user \(peer.name)")
+                        self.participants[localIndex] = peer
+                    }
+                } else {
+                    print("adding user \(peer.name)")
+                    self.participants.append(peer)
+                }
+            }
+        } else {
+            Logger.dataModel.error("Failed to decode user list")
         }
     }
 }

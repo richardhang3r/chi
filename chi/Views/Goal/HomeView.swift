@@ -27,8 +27,10 @@ struct HomeViewRoot: View {
             ForEach(goals) { goal in
                 VStack {
                     HomeView(goal: goal, authenticated: $authenticated)
-                        .onChange(of: scenePhase) { _, newPhase in handleScenePhaseChange(newPhase, goal: goal)}
                         .onReceive(NotificationCenter.default.publisher(for: .healthKitDataUpdate, object: nil)) { notification  in updateUserHealthData(notification: notification, goal: goal) }
+                    Text("\(Bundle.main.buildConfiguration) version \(Bundle.main.appVersion)")
+                                   .font(.footnote)
+                                   .foregroundColor(.gray)
                 }
                 .onAppear {
                     handleOnAppear(goal: goal)
@@ -62,32 +64,6 @@ struct HomeViewRoot: View {
     }
     
     
-    private func handleScenePhaseChange(_ newPhase: ScenePhase, goal: Goal) {
-        switch newPhase {
-        case .inactive:
-            Logger.ui.debug("inactive homeview")
-        case .active:
-            print("active! \(goal.updateCount) changes: \(modelContext.hasChanges)")
-            for parts in goal.participants {
-                let da = parts.getTodaysData()
-                let lost = Date(timeIntervalSinceReferenceDate: da.goalLost)
-                print("\(parts.name)  \(get_time_of_day_LOCAL(date: parts.lastUpdate)) lost: \(get_time_of_day_LOCAL(date: lost)) bypasses: \(da.bypasses) val: \(Int(da.value))")
-            }
-            Task {
-                let record : CKRecord = try await CloudManager.fetchGoal(recordName:goal.ident)
-                DispatchQueue.main.async {
-                    print("got record, merging \(record.description)")
-                    goal.mergeFromServerRecord(record)
-                    goal.setLastKnownRecordIfNewer(record)
-                }
-            }
-        case .background:
-            //timer.upstream.connect().cancel()
-            break
-        default:
-            break
-        }
-    }
     private func updateUserHealthData(notification: Notification, goal: Goal) {
         Logger.healthKit.debug("Health Kit Data Update")
         guard let raw = notification.userInfo?[UserInfoKey.healthKitChanges],
@@ -385,10 +361,10 @@ struct HomeView: View {
 }
 
 #Preview {
-//    let container = MainModelContainer().makeContainer()
+    let container = MainModelContainer().makeContainer()
     @State var authenticated: Bool = false
-    return  HomeView(goal: Goal(), authenticated: $authenticated)
- //       .modelContainer(container)
+    return  HomeViewRoot(goalid: "sdfs")
+        .modelContainer(container)
 }
 
 /*            .refreshable {
