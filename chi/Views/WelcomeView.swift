@@ -21,7 +21,7 @@ struct WelcomeView: View {
                 .padding()
             Text("chi")
                 .font(.title)
-            Text("ta chi tackle goals")
+            Text("mind fitness")
                 .font(.caption)
             Spacer()
             if commited == false {

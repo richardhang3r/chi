@@ -9,6 +9,7 @@ import SwiftUI
 import QuickPoseCore
 import QuickPoseSwiftUI
 import AVFoundation
+import SwiftData
 
 struct SessionData: Equatable {
     let count: Int
@@ -50,6 +51,7 @@ struct QuickPoseBasicView: View {
     @State private var feedbackText: String? = nil
     
     @State var lastUpdateTime: Date = Date.distantPast
+    @Environment(\.modelContext) private var modelContext
     // 1000 ms
     private var minIntervalMs: TimeInterval = 1000
 
@@ -118,12 +120,30 @@ struct QuickPoseBasicView: View {
                 
                 .overlay(alignment: .topTrailing) {
                     Button(action: {
+                        if let goals = try? modelContext.fetch(FetchDescriptor<Goal>()) {
+                            for goal in goals {
+                                let prev = goal.getLocalUserValue()
+                                _ = goal.updateData(val: prev + Double(counter.state.count), date: Date.now)
+                                Task {
+                                    do {
+                                        try await CloudManager.saveToCloud(goal:goal)
+                                    } catch (let error) {
+                                        print("failed to save to cloud \(error)")
+                                    }
+                                }
+                            }
+                        }
+                        quickPose.stop()
+                        dismiss()
+                        /*
                         if case .results = state {
                             dismiss()
+                        
                         } else {
                             state = .results(SessionData(count: counter.state.count, seconds: 0))
                             quickPose.stop()
                         }
+                         */
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .font(.system(size: 44))
@@ -151,8 +171,8 @@ struct QuickPoseBasicView: View {
                                 .frame(height: 15)
                         }
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
-                        .background(Color("AccentColor"))
+                        .foregroundColor(Color.accentColor)
+                        .background(Color.beige)
                     }
                 }
                 .overlay(alignment: .center) {

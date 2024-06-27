@@ -43,6 +43,20 @@
 		EB809E262C18F106005A6E73 /* EnforcementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB4FB142C0E5C980078DBB7 /* EnforcementType.swift */; };
 		EB809E272C18F146005A6E73 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB4FB252C0E6B6A0078DBB7 /* Config.swift */; };
 		EB809E282C18F1A4005A6E73 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB4FB1B2C0E5CC80078DBB7 /* Logger.swift */; };
+		EB89045F2C2C9A63000FDEEF /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8904552C2C9A63000FDEEF /* InstructionsView.swift */; };
+		EB8904602C2C9A63000FDEEF /* QuickPoseBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8904562C2C9A63000FDEEF /* QuickPoseBasicView.swift */; };
+		EB8904612C2C9A63000FDEEF /* VolumeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8904572C2C9A63000FDEEF /* VolumeChangeView.swift */; };
+		EB8904622C2C9A63000FDEEF /* JsonWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8904582C2C9A63000FDEEF /* JsonWriter.swift */; };
+		EB8904632C2C9A63000FDEEF /* GoalWorkoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8904592C2C9A63000FDEEF /* GoalWorkoutExtension.swift */; };
+		EB8904642C2C9A63000FDEEF /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB89045A2C2C9A63000FDEEF /* Timer.swift */; };
+		EB8904652C2C9A63000FDEEF /* WorkoutResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB89045B2C2C9A63000FDEEF /* WorkoutResultsView.swift */; };
+		EB8904662C2C9A63000FDEEF /* ExerciseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB89045C2C2C9A63000FDEEF /* ExerciseDetailsView.swift */; };
+		EB8904672C2C9A63000FDEEF /* Text2Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB89045D2C2C9A63000FDEEF /* Text2Speech.swift */; };
+		EB8904682C2C9A63000FDEEF /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB89045E2C2C9A63000FDEEF /* WorkoutView.swift */; };
+		EB89046B2C2C9ABB000FDEEF /* QuickPoseCamera in Frameworks */ = {isa = PBXBuildFile; productRef = EB89046A2C2C9ABB000FDEEF /* QuickPoseCamera */; };
+		EB89046D2C2C9ABB000FDEEF /* QuickPoseCore in Frameworks */ = {isa = PBXBuildFile; productRef = EB89046C2C2C9ABB000FDEEF /* QuickPoseCore */; };
+		EB89046F2C2C9ABB000FDEEF /* QuickPoseMP in Frameworks */ = {isa = PBXBuildFile; productRef = EB89046E2C2C9ABB000FDEEF /* QuickPoseMP */; };
+		EB8904712C2C9ABB000FDEEF /* QuickPoseSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = EB8904702C2C9ABB000FDEEF /* QuickPoseSwiftUI */; };
 		EBB4FAE32C0E56D70078DBB7 /* chiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB4FAE22C0E56D70078DBB7 /* chiApp.swift */; };
 		EBB4FAE52C0E56D70078DBB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB4FAE42C0E56D70078DBB7 /* ContentView.swift */; };
 		EBB4FAE92C0E56D90078DBB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB4FAE82C0E56D90078DBB7 /* Assets.xcassets */; };
@@ -153,6 +167,16 @@
 		EB575AF82C0F93330060BB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB575AF92C0F93330060BB53 /* shieldConfigurationExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shieldConfigurationExtension.entitlements; sourceTree = "<group>"; };
 		EB575B332C0FB34D0060BB53 /* PendingGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingGoal.swift; sourceTree = "<group>"; };
+		EB8904552C2C9A63000FDEEF /* InstructionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
+		EB8904562C2C9A63000FDEEF /* QuickPoseBasicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickPoseBasicView.swift; sourceTree = "<group>"; };
+		EB8904572C2C9A63000FDEEF /* VolumeChangeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeChangeView.swift; sourceTree = "<group>"; };
+		EB8904582C2C9A63000FDEEF /* JsonWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonWriter.swift; sourceTree = "<group>"; };
+		EB8904592C2C9A63000FDEEF /* GoalWorkoutExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalWorkoutExtension.swift; sourceTree = "<group>"; };
+		EB89045A2C2C9A63000FDEEF /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		EB89045B2C2C9A63000FDEEF /* WorkoutResultsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutResultsView.swift; sourceTree = "<group>"; };
+		EB89045C2C2C9A63000FDEEF /* ExerciseDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsView.swift; sourceTree = "<group>"; };
+		EB89045D2C2C9A63000FDEEF /* Text2Speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text2Speech.swift; sourceTree = "<group>"; };
+		EB89045E2C2C9A63000FDEEF /* WorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
 		EBB4FADF2C0E56D70078DBB7 /* chi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB4FAE22C0E56D70078DBB7 /* chiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chiApp.swift; sourceTree = "<group>"; };
 		EBB4FAE42C0E56D70078DBB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -225,6 +249,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB89046D2C2C9ABB000FDEEF /* QuickPoseCore in Frameworks */,
+				EB89046F2C2C9ABB000FDEEF /* QuickPoseMP in Frameworks */,
+				EB89046B2C2C9ABB000FDEEF /* QuickPoseCamera in Frameworks */,
+				EB8904712C2C9ABB000FDEEF /* QuickPoseSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +316,16 @@
 		EB575B162C0F9D910060BB53 /* workout */ = {
 			isa = PBXGroup;
 			children = (
+				EB89045C2C2C9A63000FDEEF /* ExerciseDetailsView.swift */,
+				EB8904592C2C9A63000FDEEF /* GoalWorkoutExtension.swift */,
+				EB8904552C2C9A63000FDEEF /* InstructionsView.swift */,
+				EB8904582C2C9A63000FDEEF /* JsonWriter.swift */,
+				EB8904562C2C9A63000FDEEF /* QuickPoseBasicView.swift */,
+				EB89045D2C2C9A63000FDEEF /* Text2Speech.swift */,
+				EB89045A2C2C9A63000FDEEF /* Timer.swift */,
+				EB8904572C2C9A63000FDEEF /* VolumeChangeView.swift */,
+				EB89045B2C2C9A63000FDEEF /* WorkoutResultsView.swift */,
+				EB89045E2C2C9A63000FDEEF /* WorkoutView.swift */,
 			);
 			path = workout;
 			sourceTree = "<group>";
@@ -524,6 +562,10 @@
 			);
 			name = chi;
 			packageProductDependencies = (
+				EB89046A2C2C9ABB000FDEEF /* QuickPoseCamera */,
+				EB89046C2C2C9ABB000FDEEF /* QuickPoseCore */,
+				EB89046E2C2C9ABB000FDEEF /* QuickPoseMP */,
+				EB8904702C2C9ABB000FDEEF /* QuickPoseSwiftUI */,
 			);
 			productName = chi;
 			productReference = EBB4FADF2C0E56D70078DBB7 /* chi.app */;
@@ -607,6 +649,7 @@
 			);
 			mainGroup = EBB4FAD62C0E56D70078DBB7;
 			packageReferences = (
+				EB8904692C2C9ABB000FDEEF /* XCRemoteSwiftPackageReference "quickpose-ios-sdk" */,
 			);
 			productRefGroup = EBB4FAE02C0E56D70078DBB7 /* Products */;
 			projectDirPath = "";
@@ -727,6 +770,7 @@
 				EBB4FB2C2C0E6C390078DBB7 /* GoalPasscodeView.swift in Sources */,
 				EBB4FB352C0E6D860078DBB7 /* GoalSummaryPage.swift in Sources */,
 				EBB4FB312C0E6CD30078DBB7 /* PasscodeIndicatorView.swift in Sources */,
+				EB8904612C2C9A63000FDEEF /* VolumeChangeView.swift in Sources */,
 				EBB4FAE52C0E56D70078DBB7 /* ContentView.swift in Sources */,
 				EBB4FB4D2C0F7A200078DBB7 /* GoalExtension.swift in Sources */,
 				EBB4FB3C2C0E71C70078DBB7 /* HomeView.swift in Sources */,
@@ -735,24 +779,33 @@
 				EBB4FB462C0F79D40078DBB7 /* HealthKitWrapper.swift in Sources */,
 				EBB4FB3E2C0E72370078DBB7 /* ProgressBar.swift in Sources */,
 				EBB4FB192C0E5C980078DBB7 /* ServerRecordData.swift in Sources */,
+				EB8904662C2C9A63000FDEEF /* ExerciseDetailsView.swift in Sources */,
 				EBB4FB322C0E6CD30078DBB7 /* PasscodeView.swift in Sources */,
 				EBB4FB182C0E5C980078DBB7 /* GoalType.swift in Sources */,
 				EBB4FB2A2C0E6B6A0078DBB7 /* NotificationManager.swift in Sources */,
 				EBB4FB392C0E70390078DBB7 /* RootView.swift in Sources */,
 				EBB4FB4B2C0F7A0E0078DBB7 /* SceneDelegate.swift in Sources */,
 				EBB4FB1C2C0E5CC80078DBB7 /* Logger.swift in Sources */,
+				EB8904602C2C9A63000FDEEF /* QuickPoseBasicView.swift in Sources */,
 				EBB4FB412C0F61480078DBB7 /* CloudManager.swift in Sources */,
 				EBB4FB202C0E606B0078DBB7 /* SelectScreentime.swift in Sources */,
 				EBB4FB272C0E6B6A0078DBB7 /* HelperFunctions.swift in Sources */,
 				EBB4FB172C0E5C980078DBB7 /* EnforcementType.swift in Sources */,
+				EB89045F2C2C9A63000FDEEF /* InstructionsView.swift in Sources */,
 				EBB4FB432C0F6B5F0078DBB7 /* FetchExistingGoal.swift in Sources */,
 				EBB4FB4A2C0F7A0E0078DBB7 /* AppDelegate.swift in Sources */,
+				EB8904682C2C9A63000FDEEF /* WorkoutView.swift in Sources */,
+				EB8904642C2C9A63000FDEEF /* Timer.swift in Sources */,
 				EBB4FB4F2C0F82810078DBB7 /* PeerView.swift in Sources */,
 				EBB4FAE32C0E56D70078DBB7 /* chiApp.swift in Sources */,
+				EB8904672C2C9A63000FDEEF /* Text2Speech.swift in Sources */,
 				EBB4FB102C0E56FF0078DBB7 /* WelcomeView.swift in Sources */,
+				EB8904632C2C9A63000FDEEF /* GoalWorkoutExtension.swift in Sources */,
+				EB8904622C2C9A63000FDEEF /* JsonWriter.swift in Sources */,
 				EBB4FB282C0E6B6A0078DBB7 /* ActivityMonitor.swift in Sources */,
 				EBB4FB1E2C0E5F040078DBB7 /* SelectGoalType.swift in Sources */,
 				EB2796252C28A6740086C370 /* GoalViewModel.swift in Sources */,
+				EB8904652C2C9A63000FDEEF /* WorkoutResultsView.swift in Sources */,
 				EBB4FB132C0E5BAD0078DBB7 /* Goal.swift in Sources */,
 				EB575B342C0FB34D0060BB53 /* PendingGoal.swift in Sources */,
 			);
@@ -1105,8 +1158,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1142,8 +1195,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1300,6 +1353,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EB8904692C2C9ABB000FDEEF /* XCRemoteSwiftPackageReference "quickpose-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quickpose/quickpose-ios-sdk.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EB89046A2C2C9ABB000FDEEF /* QuickPoseCamera */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB8904692C2C9ABB000FDEEF /* XCRemoteSwiftPackageReference "quickpose-ios-sdk" */;
+			productName = QuickPoseCamera;
+		};
+		EB89046C2C2C9ABB000FDEEF /* QuickPoseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB8904692C2C9ABB000FDEEF /* XCRemoteSwiftPackageReference "quickpose-ios-sdk" */;
+			productName = QuickPoseCore;
+		};
+		EB89046E2C2C9ABB000FDEEF /* QuickPoseMP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB8904692C2C9ABB000FDEEF /* XCRemoteSwiftPackageReference "quickpose-ios-sdk" */;
+			productName = QuickPoseMP;
+		};
+		EB8904702C2C9ABB000FDEEF /* QuickPoseSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB8904692C2C9ABB000FDEEF /* XCRemoteSwiftPackageReference "quickpose-ios-sdk" */;
+			productName = QuickPoseSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EBB4FAD72C0E56D70078DBB7 /* Project object */;
 }

@@ -266,6 +266,8 @@ class HealthData {
                 Task {
                     await MainActor.run {
                         print("obsrv!!")
+                        let ckManager = CloudKitManager()
+                        var recordsToSave : [CKRecord] = []
                         let modelContext = MainModelContainer().makeContainer().mainContext
                         var justCompleted : Bool = false
                         let _goals = try? modelContext.fetch(FetchDescriptor<Goal>())
@@ -288,7 +290,7 @@ class HealthData {
                                                 NotificationManager.notifyDeveloper(subtitle: "obsrv cloudkit success", message: "\(goal.type.title): \(Int(goal.getLocalUserValue()))")
                                             } catch {
                                                 print("observ cloud \(error)")
-                                                NotificationManager.notifyDeveloper(subtitle: "obsrv cloudkit err", message: error.localizedDescription.description)
+                                                NotificationManager.notifyDeveloper(subtitle: "obsrv cloudkit err", message: CloudManager.mapCloudKitError(error))
                                             }
                                         }
                                     }

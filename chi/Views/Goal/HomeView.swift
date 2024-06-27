@@ -14,6 +14,9 @@ import CloudKit
 struct HomeViewRoot: View {
     
     let goalid: String
+    @StateObject private var cloudKitManager = CloudKitManager()
+    
+    @State var cloudKitError: String? = nil
     
     @Query private var goals: [Goal]
     @Environment(\.modelContext) private var modelContext
@@ -26,6 +29,43 @@ struct HomeViewRoot: View {
         TabView {
             ForEach(goals) { goal in
                 VStack {
+                    switch cloudKitManager.state {
+                    case .idle:
+                        EmptyView()
+                    case .busy:
+                        ProgressView("deleting...")
+                            .padding()
+                    case .success(let deletedGoals):
+                        Text("saved")
+                            .onAppear {
+                                for goal in deletedGoals {
+                                    print("deleting goal \(goal.ident)")
+                                    modelContext.delete(goal)
+                                }
+                            }
+                    case .modifyDone( _, let deletedIds):
+                        Text("modified")
+                            .onAppear {
+                                for goal in goals {
+                                    let recordId = goal.lastKnownRecord!.recordID
+                                    if deletedIds.contains(where: {$0 == recordId}) {
+                                        print("deleting goal \(goal.ident)")
+                                        modelContext.delete(goal)
+                                    }
+                                }
+                            }
+                    case .error(let message):
+                        Text("cloud error: \(message)")
+                            .font(.footnote)
+                            .foregroundStyle(Color.red)
+                        Button("delete anyways") {
+                            for goal in goals {
+                                print("deleting goal \(goal.ident)")
+                                modelContext.delete(goal)
+                            }
+                        }
+                        .buttonStyle(.bordered)
+                    }
                     HomeView(goal: goal, authenticated: $authenticated)
                         .onReceive(NotificationCenter.default.publisher(for: .healthKitDataUpdate, object: nil)) { notification  in updateUserHealthData(notification: notification, goal: goal) }
                     Text("\(Bundle.main.buildConfiguration) version \(Bundle.main.appVersion)")
@@ -44,10 +84,22 @@ struct HomeViewRoot: View {
                 .toolbar {
                     buildPrincipalToolbar(goal: goal)
                     buildCancellationToolbar(goal: goal)
-                    if authenticated {
-                        buildMenuToolbar()
+               //     if authenticated {
+                //        buildMenuToolbar()
+                 //   }
+                    //buildAutomaticToolbar(goal: goal)
+                    ToolbarItem(placement: .automatic) {
+                        NavigationLink {
+                            if let exercise = goal.type.exercise {
+                                WorkoutView(exercise: exercise)
+                            } else {
+                                Text("camera not supported")
+                            }
+                        } label: {
+                            Label("camera", systemImage: "camera")
+                        }
+                        .disabled(goal.type.supportHealthKit)
                     }
-                    buildAutomaticToolbar(goal: goal)
                 }
             }
         }
@@ -127,24 +179,15 @@ struct HomeViewRoot: View {
       private func buildCancellationToolbar(goal: Goal) -> some ToolbarContent {
           ToolbarItem(placement: .cancellationAction) {
               Button {
-                  leaveGoal(goal: goal)
+                  cloudKitManager.removeSelfFromGoal(userId: globalUserId, recordId: goal.lastKnownRecord!.recordID)
+                  //leaveGoal(goal: goal)
               } label: {
                   Label("trash", systemImage: "trash")
               }
-              .disabled(!authenticated)
+              .disabled(!authenticated || cloudKitManager.state == CloudKitState.busy)
           }
       }
 
-      private func buildAutomaticToolbar(goal: Goal) -> some ToolbarContent {
-          ToolbarItem(placement: .automatic) {
-              Button {
-                  // Camera button action placeholder
-              } label: {
-                  Label("camera", systemImage: "camera")
-              }
-              .disabled(goal.type.supportHealthKit)
-          }
-      }
     
     private func toggleAuthentication(goal: Goal) {
         if authenticated {
@@ -155,6 +198,7 @@ struct HomeViewRoot: View {
     }
 
     private func leaveGoal(goal: Goal) {
+        
         Task {
             do {
                 if let record = goal.lastKnownRecord {
@@ -162,8 +206,12 @@ struct HomeViewRoot: View {
                 }
                 MyUserDefaults.clear_all_enforcement()
                 goal.teardown()
+              //  DispatchQueue.main.async {
+                //cloudKitError = nil
+               // }
                 modelContext.delete(goal)
             } catch {
+                cloudKitError = CloudManager.mapCloudKitError(error)
                 print("failed to leave goal \(goal)")
             }
         }

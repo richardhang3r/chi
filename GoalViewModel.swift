@@ -16,6 +16,9 @@ import Foundation
 import CloudKit
 
 class GoalViewModel: ObservableObject {
+    
+    
+    @Published var state: CloudKitState = .idle
     @Published var goals: [Goal] = []
     private var database = Config.cloudContainer.publicCloudDatabase
     //private let fetchQueue = DispatchQueue(label: "fetchQueue")
